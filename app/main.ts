@@ -13,9 +13,9 @@ const osName=process.platform==="win32"?"Windows":process.platform==="darwin"?"m
 async function main() {
   const flag = process.argv[2];
   const prompt = process.argv[3]
-  const apiKey = process.env.OPENROUTER_API_KEY;
-  const model = process.env.OPENROUTER_MODEL ?? "anthropic/claude-haiku-4.5";
-  const baseURL =process.env.OPENROUTER_BASE_URL ?? "https://openrouter.ai/api/v1";
+  const apiKey = process.env.NVIDIA_API_KEY;
+  const model = process.env.NVIDIA_MODEL ?? "anthropic/claude-haiku-4.5";
+  const baseURL =process.env.NVIDIA_BASE_URL ?? "https://openrouter.ai/api/v1";
      messages= [
       {role:"system",
         content:`Your are running on ${osName}.Use ${osName === "Windows" ? "Windows Command Prompt (cmd.exe)" : "Unix shell (sh)"} syntax for any Bash tool calls — for example, use ${osName === "Windows" ? "'dir', 'del', 'copy', backslash paths like C:\\Users\\...'" : "'ls', 'rm', 'cp', forward-slash paths like /home/user/...'"}. After writing or modifying a file, read it back to confirm the content is correct before finishing.`
@@ -26,7 +26,7 @@ async function main() {
   console.log(kleur.red("model used"),model)
  
   if (!apiKey) {
-    throw new Error("OPENROUTER_API_KEY is not set");
+    throw new Error("API_KEY is not set");
   }
   if (flag !== "-p" || !prompt) {
     throw new Error("error: -p flag is required");
